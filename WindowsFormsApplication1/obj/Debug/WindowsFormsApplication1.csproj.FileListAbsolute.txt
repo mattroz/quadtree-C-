@@ -7,3 +7,12 @@ D:\studying\quadtree c#\WindowsFormsApplication1\WindowsFormsApplication1\obj\De
 D:\studying\quadtree c#\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
 D:\studying\quadtree c#\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 D:\studying\quadtree c#\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+D:\studying\development\QuadTree C#\quadtree-c-sharp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+D:\studying\development\QuadTree C#\quadtree-c-sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+D:\studying\development\QuadTree C#\quadtree-c-sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+D:\studying\development\QuadTree C#\quadtree-c-sharp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+D:\studying\development\QuadTree C#\quadtree-c-sharp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+D:\studying\development\QuadTree C#\quadtree-c-sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+D:\studying\development\QuadTree C#\quadtree-c-sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+D:\studying\development\QuadTree C#\quadtree-c-sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\studying\development\QuadTree C#\quadtree-c-sharp\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
