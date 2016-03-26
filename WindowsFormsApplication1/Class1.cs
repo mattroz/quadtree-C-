@@ -119,19 +119,33 @@ public class Quadtree
     public bool Insert(Point _point)
     { 
         //if we can add current point and it's included in this quadrant range - add it!
-        if (this.points.Count <= this.MaximumObjects && ) 
+        if (this.Includes(_point))
         {
-            this.points.Add(_point);
-            return true;
-        }
-        //else if there's no place for another one point or it's not included in current quadrant range, 
-        //subdivide current leaf, detect quadrant to which we want add current point, then just add it.
-        else 
-        {
-            this.Subdivide();
+            if (this.points.Count <= this.MaximumObjects)
+            {
+                this.points.Add(_point);
+                return true;
+            }
+            //else if there's no place for another one point or it's not included in current quadrant range, 
+            //subdivide current leaf, detect quadrant to which we want add current point, then just add it.
+            else
+            {
+                this.Subdivide();
 
+                //try to push current point to one of the created leafs
+                if (this.north_west.Insert(_point)) { return true; }
+                if (this.north_east.Insert(_point)) { return true; }
+                if (this.south_west.Insert(_point)) { return true; }
+                if (this.south_east.Insert(_point)) { return true; }
+            }
         }
-     
+        else 
+        { 
+            return false; 
+        }
+
+        //this branch never executed (potentially)
+        return false;
     }
 
     #endregion
