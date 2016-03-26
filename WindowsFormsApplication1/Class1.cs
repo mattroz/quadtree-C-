@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 
 public class Quadtree
@@ -11,7 +16,7 @@ public class Quadtree
 	{
         this.LeftTopBound = _left_bound;
         this.RightBottomBound = _right_bound;
-        this.Subdivide();
+        
 	}
 
 
@@ -84,10 +89,11 @@ public class Quadtree
 
     public void Subdivide() 
     {
-        Point nw_left, nw_right,
-              ne_left, ne_right,
-              sw_left, sw_right,
-              se_left, se_right;
+        MessageBox.Show("Subdivide");
+        Point nw_left = new Point(), nw_right = new Point(),
+              ne_left = new Point(), ne_right = new Point(),
+              sw_left = new Point(), sw_right = new Point(),
+              se_left = new Point(), se_right = new Point();
 
         //north-west bound
         nw_left = this.LeftTopBound;
@@ -123,15 +129,15 @@ public class Quadtree
         {
             if (this.points.Count <= this.MaximumObjects)
             {
+                MessageBox.Show("Point (" + _point.X + ";" + _point.Y + ") added");
                 this.points.Add(_point);
                 return true;
             }
             //else if there's no place for another one point or it's not included in current quadrant range, 
-            //subdivide current leaf, detect quadrant to which we want add current point, then just add it.
+            //subdivide current leaf, detect quadrant to which we want to add current point, then just add it.
             else
             {
                 this.Subdivide();
-
                 //try to push current point to one of the created leafs
                 if (this.north_west.Insert(_point)) { return true; }
                 if (this.north_east.Insert(_point)) { return true; }

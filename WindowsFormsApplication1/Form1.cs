@@ -17,13 +17,14 @@ namespace WindowsFormsApplication1
         const int POINT_SIZE = 5;
         
         //global scope variables
-        Point top_left_coord = new Point();
-        Point top_right_coord = new Point();
-        Point bottom_left_coord = new Point();
-        Point bottom_right_coord = new Point();
 
         int window_width = Form1.ActiveForm.Width;
         int window_height = Form1.ActiveForm.Height;
+
+        Point left_top_coord;
+        Point right_bottom_coord;
+
+        Quadtree root;
 
         Dictionary<int, int> points_coordinates = new Dictionary<int, int>();
 
@@ -54,7 +55,7 @@ namespace WindowsFormsApplication1
             
         }
 
-        private void DrawCoordinateGrid() 
+        private void DrawGrid() 
         {
             System.Drawing.Graphics _graphics = this.CreateGraphics();
             Pen line_pen = new Pen(Color.Black, 2);
@@ -75,44 +76,38 @@ namespace WindowsFormsApplication1
 
         public Form1()
         {
-            InitializeComponent();
-        }
-
-        private void Form1_MouseClick(object sender, MouseEventArgs e)
-        {
-            DrawPoint(e.X, e.Y);
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-           
-        }
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
+            InitializeComponent(); 
+            left_top_coord = new Point(0, 0);
+            right_bottom_coord = new Point(window_width, window_height);
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
             window_height = ActiveForm.Height;
             window_width = ActiveForm.Width;
+            left_top_coord = new Point(0, 0);
+            right_bottom_coord = new Point(window_width, window_height);
+
             this.Refresh();
-            DrawCoordinateGrid();
+            //DrawGrid();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                DrawPoint(e.X, e.Y);
+                Point point = new Point(e.X, e.Y);
+                root.Insert(point);
+            }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
-           
+            root = new Quadtree(left_top_coord, right_bottom_coord);        //init quadtree
+            MessageBox.Show("Root bounds are " + root.RightBottomBound.X + ";" + root.RightBottomBound.Y);
         }
     }
 }
