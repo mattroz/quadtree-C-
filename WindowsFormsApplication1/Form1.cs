@@ -55,19 +55,33 @@ namespace WindowsFormsApplication1
             
         }
 
-        private void DrawGrid() 
+        //draw grid to show entity of quadtree
+        private void DrawGrid(Point left_top, Point right_bottom) 
         {
             System.Drawing.Graphics _graphics = this.CreateGraphics();
             Pen line_pen = new Pen(Color.Black, 2);
 
-            //vertical line
-            Point vertical_top = new Point(window_width / 2, 0);
-            Point vertical_bottom = new Point(window_width/2, window_height);
+            //vertical line coordinates
+            Point vertical_top = new Point(
+                    left_top.X + (right_bottom.X - left_top.Y) / 2, 
+                    0
+                );
+
+            Point vertical_bottom = new Point(
+                    vertical_top.X, 
+                    right_bottom.Y
+                );
             _graphics.DrawLine(line_pen, vertical_top, vertical_bottom);
 
-            //horizontal line (substract 20 pixels 'cause of some error in values)
-            Point horizontal_left = new Point(0, window_height/2 - 20);
-            Point horizontal_right = new Point(window_width, window_height/2 - 20);
+            //horizontal line coordinates (substract 20 pixels 'cause of some error in values)
+            Point horizontal_left = new Point(
+                    left_top.X,
+                    left_top.Y + (right_bottom.Y - left_top.Y) / 2
+                );
+            Point horizontal_right = new Point(
+                    right_bottom.X,
+                    right_bottom.Y / 2
+                );
             _graphics.DrawLine(line_pen, horizontal_left, horizontal_right);
         }
 
@@ -81,6 +95,7 @@ namespace WindowsFormsApplication1
             right_bottom_coord = new Point(window_width, window_height);
         }
 
+        //redraw grid on resize
         private void Form1_Resize(object sender, EventArgs e)
         {
             window_height = ActiveForm.Height;
@@ -89,7 +104,7 @@ namespace WindowsFormsApplication1
             right_bottom_coord = new Point(window_width, window_height);
 
             this.Refresh();
-            //DrawGrid();
+            DrawGrid(left_top_coord, right_bottom_coord);
         }
 
 
