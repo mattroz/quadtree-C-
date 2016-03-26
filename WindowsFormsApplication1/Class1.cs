@@ -27,25 +27,36 @@ public class Quadtree
     Quadtree south_east = new Quadtree();
 
     /////////////////////////////   CLASS METHODS   /////////////////////////////
-    //setters
+    //setters/getters
 
-    public void setNumberOfChildren(int _children_number) 
+    public int NumberOfChildren
     {
-        this.number_of_children = _children_number;
+        set { this.number_of_children = value ;}
+        get { return this.number_of_children; }
     }
 
-    public void setMaximumObjects(int _maximum_objects_number) 
+    public int MaximumObjects    
     {
-        this.maximum_objects = _maximum_objects_number;
+        set { this.maximum_objects = value; }
+        get { return this.maximum_objects; }
     }
 
-    public void setBounds(Point _left_top, Point _right_bottom) {
-        this.left_top_bound = _left_top;
-        this.right_bottom_bound = _right_bottom;
+    public Point LeftTopBound 
+    {
+        set { this.left_top_bound = value; }
+        get { return this.left_top_bound; }
     }
 
-    public void setParent(ref Quadtree parent_node) {
-        this.parent = parent_node;
+    public Point RightBottomBound
+    {
+        set { this.right_bottom_bound = value; }
+        get { return this.right_bottom_bound; }
     }
 
+    public Quadtree setParent {
+        set { this.parent = value; }
+        get { return this.parent; }
+    }
+
+    
 }
