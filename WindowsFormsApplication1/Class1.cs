@@ -16,13 +16,15 @@ public class Quadtree
 
 
     ////////////////////////////    CLASS FIELDS   /////////////////////////////////
+
+    #region
     private const int DEFAULT_MAX_OBJ = 2;
 
     private int maximum_objects = 2;
     private int number_of_children = 0;
     private List<Point> points = new List<Point>();
 
-    private Point left_top_bound;       //bounds are two points: top left corner of an rectangle and bottom right corner
+    private Point left_top_bound;          //bounds are two points: top left corner of an rectangle and bottom right corner
     private Point right_bottom_bound;      //consequently, this is rectangle diagonale line in common
     
     Quadtree parent;
@@ -30,8 +32,11 @@ public class Quadtree
     Quadtree north_east;
     Quadtree south_west;
     Quadtree south_east;
+    #endregion
 
     /////////////////////////////   CLASS METHODS   /////////////////////////////
+
+    #region
     //setters/getters
 
     public int NumberOfChildren
@@ -62,6 +67,17 @@ public class Quadtree
     {
         set { this.parent = value; }
         get { return this.parent; }
+    }
+
+    //calculate methods
+
+    //check if this quadrant includes current point
+    public bool Includes(Point _point) { 
+        if( (_point.X > this.LeftTopBound.X && _point.X < this.RightBottomBound.X) &&
+            (_point.Y > this.LeftTopBound.Y && _point.Y < this.RightBottomBound.Y) ){
+                return true;
+        }
+        return false;
     }
 
     //basic Quadtree methods
@@ -100,8 +116,23 @@ public class Quadtree
         this.south_east = new Quadtree(se_left, se_right);
     }
 
-    public void Insert(Point _point)
-    {
-        this.points.Add(_point);
+    public bool Insert(Point _point)
+    { 
+        //if we can add current point and it's included in this quadrant range - add it!
+        if (this.points.Count <= this.MaximumObjects && ) 
+        {
+            this.points.Add(_point);
+            return true;
+        }
+        //else if there's no place for another one point or it's not included in current quadrant range, 
+        //subdivide current leaf, detect quadrant to which we want add current point, then just add it.
+        else 
+        {
+            this.Subdivide();
+
+        }
+     
     }
+
+    #endregion
 }
