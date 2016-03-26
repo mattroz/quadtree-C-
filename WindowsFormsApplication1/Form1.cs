@@ -24,6 +24,8 @@ namespace WindowsFormsApplication1
         Point left_top_coord;
         Point right_bottom_coord;
 
+        Control control = new Control();
+
         Quadtree root;
 
         Dictionary<int, int> points_coordinates = new Dictionary<int, int>();
@@ -56,9 +58,9 @@ namespace WindowsFormsApplication1
         }
 
         //draw grid to show entity of quadtree
-        private void DrawGrid(Point left_top, Point right_bottom) 
+        static public void DrawGrid(Point left_top, Point right_bottom) 
         {
-            System.Drawing.Graphics _graphics = this.CreateGraphics();
+            System.Drawing.Graphics _graphics = Form1.ActiveForm.CreateGraphics();
             Pen line_pen = new Pen(Color.Black, 2);
 
             //vertical line coordinates
@@ -90,7 +92,8 @@ namespace WindowsFormsApplication1
 
         public Form1()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            control = this;
             left_top_coord = new Point(0, 0);
             right_bottom_coord = new Point(window_width, window_height);
         }
@@ -113,7 +116,9 @@ namespace WindowsFormsApplication1
         {
             if (e.Button == MouseButtons.Left)
             {
+
                 DrawPoint(e.X, e.Y);
+                Form1 form = new Form1();
                 Point point = new Point(e.X, e.Y);
                 root.Insert(point);
             }

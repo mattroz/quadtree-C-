@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
+
 public class Quadtree
 {
     //constructor
@@ -16,7 +17,6 @@ public class Quadtree
 	{
         this.LeftTopBound = _left_bound;
         this.RightBottomBound = _right_bound;
-        
 	}
 
 
@@ -120,17 +120,22 @@ public class Quadtree
         this.north_east = new Quadtree(ne_left, ne_right);
         this.south_west = new Quadtree(sw_left, sw_right);
         this.south_east = new Quadtree(se_left, se_right);
+
+        WindowsFormsApplication1.Form1.DrawGrid(this.LeftTopBound, this.RightBottomBound);
+        
     }
 
     public bool Insert(Point _point)
-    { 
+    {
+        //get form for drawing bounds (guess i'll complain 'bout it, but ftw)
+       
         //if we can add current point and it's included in this quadrant range - add it!
         if (this.Includes(_point))
         {
             if (this.points.Count <= this.MaximumObjects)
             {
-                MessageBox.Show("Point (" + _point.X + ";" + _point.Y + ") added");
                 this.points.Add(_point);
+                MessageBox.Show("Point (" + _point.X + ";" + _point.Y + ") added");
                 return true;
             }
             //else if there's no place for another one point or it's not included in current quadrant range, 
