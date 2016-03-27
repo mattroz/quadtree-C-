@@ -62,7 +62,6 @@ namespace WindowsFormsApplication1
         //draw grid to show entity of quadtree
         static public void DrawGrid(Point left_top, Point right_bottom) 
         {
-            MessageBox.Show("DRAW");
             System.Drawing.Graphics _graphics = WindowsFormsApplication1.Form1.ActiveForm.CreateGraphics();
             Pen line_pen = new Pen(Color.Black, 2);
 
@@ -88,6 +87,9 @@ namespace WindowsFormsApplication1
                     right_bottom.Y / 2
                 );
             _graphics.DrawLine(line_pen, horizontal_left, horizontal_right);
+
+            MessageBox.Show("HORIZONTAL: ("+horizontal_left.X+";"+horizontal_left.Y+") to ("+horizontal_right.X + ";"+ horizontal_right.Y + 
+                            "\nVERTICAL: ("+vertical_top.X +";"+vertical_top.Y+") to ("+vertical_bottom.X+";"+vertical_bottom.Y+")");
         }
 
 
@@ -125,10 +127,10 @@ namespace WindowsFormsApplication1
                 Point point = new Point(e.X, e.Y);
                 root.Insert(point);
                 
-                if(this.isSubdivided)
-                {
-                    DrawGrid(root.LeftTopBound, root.RightBottomBound);       
-                }
+                //if(this.isSubdivided)
+                //{
+                //    DrawGrid(root.LeftTopBound, root.RightBottomBound);       
+                //}
             }
         }
 

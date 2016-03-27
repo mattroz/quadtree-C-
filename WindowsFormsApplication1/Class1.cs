@@ -123,15 +123,13 @@ public class Quadtree
         this.north_east = new Quadtree(ne_left, ne_right, null);
         this.south_west = new Quadtree(sw_left, sw_right, null);
         this.south_east = new Quadtree(se_left, se_right, null);
-
-        this.form.isSubdivided = true;
-
-        //WindowsFormsApplication1.Form1.DrawGrid(this.LeftTopBound, this.RightBottomBound, this.form);
         
     }
 
     public bool Insert(Point _point)
-    {     
+    {
+        WindowsFormsApplication1.Form1.DrawGrid(this.LeftTopBound, this.RightBottomBound);
+
         //if we can add current point and it's included in this quadrant range - add it!
         if (this.Includes(_point))
         {
