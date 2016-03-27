@@ -21,6 +21,8 @@ namespace WindowsFormsApplication1
         int window_width = Form1.ActiveForm.Width;
         int window_height = Form1.ActiveForm.Height;
 
+        public bool isSubdivided = false;
+
         Point left_top_coord;
         Point right_bottom_coord;
 
@@ -60,7 +62,8 @@ namespace WindowsFormsApplication1
         //draw grid to show entity of quadtree
         static public void DrawGrid(Point left_top, Point right_bottom) 
         {
-            System.Drawing.Graphics _graphics = Form1.ActiveForm.CreateGraphics();
+            MessageBox.Show("DRAW");
+            System.Drawing.Graphics _graphics = WindowsFormsApplication1.Form1.ActiveForm.CreateGraphics();
             Pen line_pen = new Pen(Color.Black, 2);
 
             //vertical line coordinates
@@ -121,12 +124,17 @@ namespace WindowsFormsApplication1
                 Form1 form = new Form1();
                 Point point = new Point(e.X, e.Y);
                 root.Insert(point);
+                
+                if(this.isSubdivided)
+                {
+                    DrawGrid(root.LeftTopBound, root.RightBottomBound);       
+                }
             }
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            root = new Quadtree(left_top_coord, right_bottom_coord);        //init quadtree
+            root = new Quadtree(left_top_coord, right_bottom_coord, this);        //init quadtree
             MessageBox.Show("Root bounds are " + root.RightBottomBound.X + ";" + root.RightBottomBound.Y);
         }
     }

@@ -13,10 +13,11 @@ using System.Windows.Forms;
 public class Quadtree
 {
     //constructor
-	public Quadtree(Point _left_bound, Point _right_bound)
+    public Quadtree(Point _left_bound, Point _right_bound, WindowsFormsApplication1.Form1 _form)
 	{
         this.LeftTopBound = _left_bound;
         this.RightBottomBound = _right_bound;
+        this.form = _form;
 	}
 
 
@@ -24,6 +25,8 @@ public class Quadtree
 
     #region
     private const int DEFAULT_MAX_OBJ = 2;
+
+    WindowsFormsApplication1.Form1 form = null;
 
     private int maximum_objects = 2;
     private int number_of_children = 0;
@@ -116,19 +119,19 @@ public class Quadtree
         se_left = nw_right;
         se_right = this.RightBottomBound;
 
-        this.north_west = new Quadtree(nw_left, nw_right);
-        this.north_east = new Quadtree(ne_left, ne_right);
-        this.south_west = new Quadtree(sw_left, sw_right);
-        this.south_east = new Quadtree(se_left, se_right);
+        this.north_west = new Quadtree(nw_left, nw_right, null);
+        this.north_east = new Quadtree(ne_left, ne_right, null);
+        this.south_west = new Quadtree(sw_left, sw_right, null);
+        this.south_east = new Quadtree(se_left, se_right, null);
 
-        WindowsFormsApplication1.Form1.DrawGrid(this.LeftTopBound, this.RightBottomBound);
+        this.form.isSubdivided = true;
+
+        //WindowsFormsApplication1.Form1.DrawGrid(this.LeftTopBound, this.RightBottomBound, this.form);
         
     }
 
     public bool Insert(Point _point)
-    {
-        //get form for drawing bounds (guess i'll complain 'bout it, but ftw)
-       
+    {     
         //if we can add current point and it's included in this quadrant range - add it!
         if (this.Includes(_point))
         {
