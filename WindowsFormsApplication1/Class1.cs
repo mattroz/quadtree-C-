@@ -104,20 +104,23 @@ public class Quadtree
         nw_right.Y = this.RightBottomBound.Y / 2;
 
         // calculate north-east bound, seems horrible
-        ne_left.X = this.LeftTopBound.X + (this.LeftTopBound.X + this.RightBottomBound.X) / 2 ;
+        ne_left.X = this.RightBottomBound.X / 2;
         ne_left.Y = this.LeftTopBound.Y;
         ne_right.X = this.RightBottomBound.X;
-        ne_right.Y = this.LeftTopBound.Y + this.RightBottomBound.Y / 2;
+        ne_right.Y = this.RightBottomBound.Y / 2;
 
         //south-west bound
         sw_left.X = this.LeftTopBound.X;
-        sw_left.Y = this.LeftTopBound.Y + this.RightBottomBound.Y / 2;
-        sw_right.X = ne_left.X;
+        sw_left.Y = this.RightBottomBound.Y / 2;
+        sw_right.X = this.RightBottomBound.X / 2;
         sw_right.Y = this.RightBottomBound.Y;
 
         //south-east bound
-        se_left = nw_right;
-        se_right = this.RightBottomBound;
+        se_left.X = this.RightBottomBound.X / 2;
+        se_left.Y = this.RightBottomBound.Y / 2;
+        se_right.X = this.RightBottomBound.X;
+        se_right.Y = this.RightBottomBound.Y;
+        //se_right = this.RightBottomBound;
 
         this.north_west = new Quadtree(nw_left, nw_right, this.form);
         this.north_east = new Quadtree(ne_left, ne_right, this.form);

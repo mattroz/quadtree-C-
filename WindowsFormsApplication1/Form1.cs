@@ -67,12 +67,12 @@ namespace WindowsFormsApplication1
 
             //vertical line coordinates
             Point vertical_top = new Point(
-                    left_top.X + (right_bottom.X - left_top.Y) / 2, 
-                    left_top.Y
+                   right_bottom.X / 2,
+                   left_top.Y
                 );
 
             Point vertical_bottom = new Point(
-                    vertical_top.X, 
+                    right_bottom.X / 2,
                     right_bottom.Y
                 );
             _graphics.DrawLine(line_pen, vertical_top, vertical_bottom);
@@ -80,7 +80,7 @@ namespace WindowsFormsApplication1
             //horizontal line coordinates (substract 20 pixels 'cause of some error in values)
             Point horizontal_left = new Point(
                     left_top.X,
-                    left_top.Y + (right_bottom.Y - left_top.Y) / 2
+                    right_bottom.Y / 2
                 );
 
             Point horizontal_right = new Point(
