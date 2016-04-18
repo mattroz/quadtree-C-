@@ -79,9 +79,9 @@ namespace WindowsFormsApplication1
 
             //horizontal line coordinates (substract 20 pixels 'cause of some error in values)
             Point horizontal_left = new Point(
-                    left_top.X,
-                    right_bottom.Y / 2
-                );
+                   left_top.X,
+                   right_bottom.Y / 2
+               );
 
             Point horizontal_right = new Point(
                     right_bottom.X,
