@@ -68,7 +68,7 @@ namespace WindowsFormsApplication1
             //vertical line coordinates
             Point vertical_top = new Point(
                     left_top.X + (right_bottom.X - left_top.Y) / 2, 
-                    0
+                    left_top.Y
                 );
 
             Point vertical_bottom = new Point(
@@ -82,14 +82,16 @@ namespace WindowsFormsApplication1
                     left_top.X,
                     left_top.Y + (right_bottom.Y - left_top.Y) / 2
                 );
+
             Point horizontal_right = new Point(
                     right_bottom.X,
                     right_bottom.Y / 2
                 );
+
             _graphics.DrawLine(line_pen, horizontal_left, horizontal_right);
 
-            MessageBox.Show("HORIZONTAL: ("+horizontal_left.X+";"+horizontal_left.Y+") to ("+horizontal_right.X + ";"+ horizontal_right.Y + 
-                            "\nVERTICAL: ("+vertical_top.X +";"+vertical_top.Y+") to ("+vertical_bottom.X+";"+vertical_bottom.Y+")");
+            //MessageBox.Show("HORIZONTAL: ("+horizontal_left.X+";"+horizontal_left.Y+") to ("+horizontal_right.X + ";"+ horizontal_right.Y + 
+            //                "\nVERTICAL: ("+vertical_top.X +";"+vertical_top.Y+") to ("+vertical_bottom.X+";"+vertical_bottom.Y+")");
         }
 
 
@@ -112,9 +114,8 @@ namespace WindowsFormsApplication1
             right_bottom_coord = new Point(window_width, window_height);
 
             this.Refresh();
-            DrawGrid(left_top_coord, right_bottom_coord);
+            //DrawGrid(left_top_coord, right_bottom_coord);
         }
-
 
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)

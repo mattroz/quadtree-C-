@@ -92,7 +92,7 @@ public class Quadtree
 
     public void Subdivide() 
     {
-        MessageBox.Show("Subdivide");
+
         Point nw_left = new Point(), nw_right = new Point(),
               ne_left = new Point(), ne_right = new Point(),
               sw_left = new Point(), sw_right = new Point(),
@@ -111,18 +111,18 @@ public class Quadtree
 
         //south-west bound
         sw_left.X = this.LeftTopBound.X;
-        sw_left.Y = this.LeftTopBound .Y + this.RightBottomBound.Y / 2;
+        sw_left.Y = this.LeftTopBound.Y + this.RightBottomBound.Y / 2;
         sw_right.X = ne_left.X;
-        sw_right.Y = this.RightBottomBound.Y / 2;
+        sw_right.Y = this.RightBottomBound.Y;
 
         //south-east bound
         se_left = nw_right;
         se_right = this.RightBottomBound;
 
-        this.north_west = new Quadtree(nw_left, nw_right, null);
-        this.north_east = new Quadtree(ne_left, ne_right, null);
-        this.south_west = new Quadtree(sw_left, sw_right, null);
-        this.south_east = new Quadtree(se_left, se_right, null);
+        this.north_west = new Quadtree(nw_left, nw_right, this.form);
+        this.north_east = new Quadtree(ne_left, ne_right, this.form);
+        this.south_west = new Quadtree(sw_left, sw_right, this.form);
+        this.south_east = new Quadtree(se_left, se_right, this.form);
         
     }
 
@@ -136,7 +136,7 @@ public class Quadtree
             if (this.points.Count <= this.MaximumObjects)
             {
                 this.points.Add(_point);
-                MessageBox.Show("Point (" + _point.X + ";" + _point.Y + ") added");
+                //MessageBox.Show("Point (" + _point.X + ";" + _point.Y + ") added");
                 return true;
             }
             //else if there's no place for another one point or it's not included in current quadrant range, 
@@ -144,11 +144,15 @@ public class Quadtree
             else
             {
                 this.Subdivide();
+
+                
+                
+                MessageBox.Show("Subdivide");
                 //try to push current point to one of the created leafs
-                if (this.north_west.Insert(_point)) { return true; }
-                if (this.north_east.Insert(_point)) { return true; }
-                if (this.south_west.Insert(_point)) { return true; }
-                if (this.south_east.Insert(_point)) { return true; }
+                if (this.north_west.Insert(_point)) { MessageBox.Show("north-west"); return true; }
+                if (this.north_east.Insert(_point)) { MessageBox.Show("north-east"); return true; }
+                if (this.south_west.Insert(_point)) { MessageBox.Show("south-west"); return true; }
+                if (this.south_east.Insert(_point)) { MessageBox.Show("south-east"); return true; }
             }
         }
         else 
