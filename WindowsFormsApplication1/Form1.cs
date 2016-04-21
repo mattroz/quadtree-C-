@@ -59,7 +59,8 @@ namespace WindowsFormsApplication1
             
         }
 
-        //draw grid to show entity of quadtree
+        //draw grid to show entity of quadtree (based on calculation middle-lanes
+        //using left top and right bottom corners coordinates)
         static public void DrawGrid(Point left_top, Point right_bottom) 
         {
             System.Drawing.Graphics _graphics = WindowsFormsApplication1.Form1.ActiveForm.CreateGraphics();
@@ -118,7 +119,7 @@ namespace WindowsFormsApplication1
             //DrawGrid(left_top_coord, right_bottom_coord);
         }
 
-
+        //draw a point and add it to the tree
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -131,7 +132,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-
+        //initialize quadtree on button press
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             root = new Quadtree(left_top_coord, right_bottom_coord, this);        //init quadtree

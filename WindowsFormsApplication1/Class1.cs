@@ -124,6 +124,7 @@ public class Quadtree
         se_left.Y = this.RightBottomBound.Y / 2;
         se_right = this.RightBottomBound;
 
+        //initialize new leafs
         this.north_west = new Quadtree(nw_left, nw_right, null);
         this.north_east = new Quadtree(ne_left, ne_right, null);
         this.south_west = new Quadtree(sw_left, sw_right, null);
@@ -141,6 +142,7 @@ public class Quadtree
                 this.points.Add(_point);
                 return true;
             }
+
             //else if there's no place for another one point or it's not included in current quadrant range, 
             //subdivide current leaf, detect quadrant to which we want to add current point, then just add it.
             else
@@ -149,13 +151,13 @@ public class Quadtree
                 this.Subdivide();
                 this.NumberOfChildren += 4;
 
+                MessageBox.Show("Subdivide");
+
                 //try to push current point to one of the created leafs
                 if (this.north_west.Insert(_point)) { this.north_west.Parent = this; return true; }
                 if (this.north_east.Insert(_point)) { this.north_east.Parent = this; return true; }
                 if (this.south_west.Insert(_point)) { this.south_west.Parent = this; return true; }
-                if (this.south_east.Insert(_point)) { this.south_east.Parent = this; return true; }
-
-                MessageBox.Show("Subdivide");
+                if (this.south_east.Insert(_point)) { this.south_east.Parent = this; return true; }                
             }
         }
         else 
