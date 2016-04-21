@@ -53,11 +53,13 @@ public class Quadtree
         get { return this.number_of_children; }
     }
 
+
     public int MaximumObjects    
     {
         set { this.maximum_objects = value; }
         get { return this.maximum_objects; }
     }
+
 
     public Point LeftTopBound 
     {
@@ -65,11 +67,13 @@ public class Quadtree
         get { return this.left_top_bound; }
     }
 
+
     public Point RightBottomBound
     {
         set { this.right_bottom_bound = value; }
         get { return this.right_bottom_bound; }
     }
+
 
     public Quadtree Parent 
     {
@@ -103,7 +107,7 @@ public class Quadtree
         nw_right.X = this.RightBottomBound.X / 2;
         nw_right.Y = this.RightBottomBound.Y / 2;
 
-        // calculate north-east bound, seems horrible
+        // calculate north-east bound
         ne_left.X = this.RightBottomBound.X / 2;
         ne_left.Y = this.LeftTopBound.Y;
         ne_right.X = this.RightBottomBound.X;
@@ -118,16 +122,16 @@ public class Quadtree
         //south-east bound
         se_left.X = this.RightBottomBound.X / 2;
         se_left.Y = this.RightBottomBound.Y / 2;
-        se_right.X = this.RightBottomBound.X;
-        se_right.Y = this.RightBottomBound.Y;
-        //se_right = this.RightBottomBound;
+        //se_right.X = this.RightBottomBound.X;
+        //se_right.Y = this.RightBottomBound.Y;
+        se_right = this.RightBottomBound;
 
-        this.north_west = new Quadtree(nw_left, nw_right, this.form);
-        this.north_east = new Quadtree(ne_left, ne_right, this.form);
-        this.south_west = new Quadtree(sw_left, sw_right, this.form);
-        this.south_east = new Quadtree(se_left, se_right, this.form);
-        
+        this.north_west = new Quadtree(nw_left, nw_right, null);
+        this.north_east = new Quadtree(ne_left, ne_right, null);
+        this.south_west = new Quadtree(sw_left, sw_right, null);
+        this.south_east = new Quadtree(se_left, se_right, null);
     }
+
 
     public bool Insert(Point _point)
     {
@@ -139,7 +143,6 @@ public class Quadtree
             if (this.points.Count <= this.MaximumObjects)
             {
                 this.points.Add(_point);
-                //MessageBox.Show("Point (" + _point.X + ";" + _point.Y + ") added");
                 return true;
             }
             //else if there's no place for another one point or it's not included in current quadrant range, 
@@ -148,8 +151,6 @@ public class Quadtree
             {
                 this.Subdivide();
 
-                
-                
                 MessageBox.Show("Subdivide");
                 //try to push current point to one of the created leafs
                 if (this.north_west.Insert(_point)) { MessageBox.Show("north-west"); return true; }

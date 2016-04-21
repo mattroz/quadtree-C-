@@ -63,35 +63,36 @@ namespace WindowsFormsApplication1
         static public void DrawGrid(Point left_top, Point right_bottom) 
         {
             System.Drawing.Graphics _graphics = WindowsFormsApplication1.Form1.ActiveForm.CreateGraphics();
-            Pen line_pen = new Pen(Color.Black, 2);
+            Pen line_pen = new Pen(Color.Red, 2);
 
             //vertical line coordinates
             Point vertical_top = new Point(
-                   right_bottom.X / 2,
+                   left_top.X + (right_bottom.X - left_top.X) / 2,
                    left_top.Y
                 );
 
             Point vertical_bottom = new Point(
-                    right_bottom.X / 2,
+                    left_top.X + (right_bottom.X - left_top.X) / 2,
                     right_bottom.Y
                 );
             _graphics.DrawLine(line_pen, vertical_top, vertical_bottom);
 
-            //horizontal line coordinates (substract 20 pixels 'cause of some error in values)
+            //horizontal line coordinates
             Point horizontal_left = new Point(
-                   left_top.X,
-                   right_bottom.Y / 2
+                    left_top.X,
+                    left_top.Y + (right_bottom.Y - left_top.Y) / 2
                );
 
             Point horizontal_right = new Point(
                     right_bottom.X,
-                    right_bottom.Y / 2
+                    left_top.Y + (right_bottom.Y - left_top.Y) / 2
                 );
 
+            line_pen = new Pen(Color.Pink,2);
             _graphics.DrawLine(line_pen, horizontal_left, horizontal_right);
 
-            //MessageBox.Show("HORIZONTAL: ("+horizontal_left.X+";"+horizontal_left.Y+") to ("+horizontal_right.X + ";"+ horizontal_right.Y + 
-            //                "\nVERTICAL: ("+vertical_top.X +";"+vertical_top.Y+") to ("+vertical_bottom.X+";"+vertical_bottom.Y+")");
+            MessageBox.Show("HORIZONTAL: (" + horizontal_left.X + ";" + horizontal_left.Y + ") to (" + horizontal_right.X + ";" + horizontal_right.Y +
+                            "\nVERTICAL: (" + vertical_top.X + ";" + vertical_top.Y + ") to (" + vertical_bottom.X + ";" + vertical_bottom.Y + ")");
         }
 
 
@@ -127,13 +128,9 @@ namespace WindowsFormsApplication1
                 Form1 form = new Form1();
                 Point point = new Point(e.X, e.Y);
                 root.Insert(point);
-                
-                //if(this.isSubdivided)
-                //{
-                //    DrawGrid(root.LeftTopBound, root.RightBottomBound);       
-                //}
             }
         }
+
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
