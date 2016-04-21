@@ -91,8 +91,8 @@ namespace WindowsFormsApplication1
             line_pen = new Pen(Color.Pink,2);
             _graphics.DrawLine(line_pen, horizontal_left, horizontal_right);
 
-            MessageBox.Show("HORIZONTAL: (" + horizontal_left.X + ";" + horizontal_left.Y + ") to (" + horizontal_right.X + ";" + horizontal_right.Y +
-                            "\nVERTICAL: (" + vertical_top.X + ";" + vertical_top.Y + ") to (" + vertical_bottom.X + ";" + vertical_bottom.Y + ")");
+            //MessageBox.Show("HORIZONTAL: (" + horizontal_left.X + ";" + horizontal_left.Y + ") to (" + horizontal_right.X + ";" + horizontal_right.Y +
+            //                "\nVERTICAL: (" + vertical_top.X + ";" + vertical_top.Y + ") to (" + vertical_bottom.X + ";" + vertical_bottom.Y + ")");
         }
 
 

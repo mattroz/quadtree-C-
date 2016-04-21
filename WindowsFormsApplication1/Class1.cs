@@ -18,6 +18,7 @@ public class Quadtree
         this.LeftTopBound = _left_bound;
         this.RightBottomBound = _right_bound;
         this.form = _form;
+        this.points = new List<Point>();
 	}
 
 
@@ -30,7 +31,7 @@ public class Quadtree
 
     private int maximum_objects = 2;
     private int number_of_children = 0;
-    private List<Point> points = new List<Point>();
+    private List<Point> points;
 
     private Point left_top_bound;          //bounds are two points: top left corner of an rectangle and bottom right corner
     private Point right_bottom_bound;      //consequently, this is rectangle diagonale line in common
@@ -96,7 +97,6 @@ public class Quadtree
 
     public void Subdivide() 
     {
-
         Point nw_left = new Point(), nw_right = new Point(),
               ne_left = new Point(), ne_right = new Point(),
               sw_left = new Point(), sw_right = new Point(),
@@ -122,8 +122,6 @@ public class Quadtree
         //south-east bound
         se_left.X = this.RightBottomBound.X / 2;
         se_left.Y = this.RightBottomBound.Y / 2;
-        //se_right.X = this.RightBottomBound.X;
-        //se_right.Y = this.RightBottomBound.Y;
         se_right = this.RightBottomBound;
 
         this.north_west = new Quadtree(nw_left, nw_right, null);
@@ -135,8 +133,6 @@ public class Quadtree
 
     public bool Insert(Point _point)
     {
-        WindowsFormsApplication1.Form1.DrawGrid(this.LeftTopBound, this.RightBottomBound);
-
         //if we can add current point and it's included in this quadrant range - add it!
         if (this.Includes(_point))
         {
@@ -149,14 +145,17 @@ public class Quadtree
             //subdivide current leaf, detect quadrant to which we want to add current point, then just add it.
             else
             {
+                WindowsFormsApplication1.Form1.DrawGrid(this.LeftTopBound, this.RightBottomBound);
                 this.Subdivide();
+                this.NumberOfChildren += 4;
+
+                //try to push current point to one of the created leafs
+                if (this.north_west.Insert(_point)) { this.north_west.Parent = this; return true; }
+                if (this.north_east.Insert(_point)) { this.north_east.Parent = this; return true; }
+                if (this.south_west.Insert(_point)) { this.south_west.Parent = this; return true; }
+                if (this.south_east.Insert(_point)) { this.south_east.Parent = this; return true; }
 
                 MessageBox.Show("Subdivide");
-                //try to push current point to one of the created leafs
-                if (this.north_west.Insert(_point)) { MessageBox.Show("north-west"); return true; }
-                if (this.north_east.Insert(_point)) { MessageBox.Show("north-east"); return true; }
-                if (this.south_west.Insert(_point)) { MessageBox.Show("south-west"); return true; }
-                if (this.south_east.Insert(_point)) { MessageBox.Show("south-east"); return true; }
             }
         }
         else 
